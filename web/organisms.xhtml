@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>WebAppAPI: Organisms</title>
+    </h:head>
+    <h:body>
+        <h:link value="Index" outcome="index"/> | <h:link value="Experiments" outcome="experiments"/> | <h:link value="Authors" outcome="authors"/> | <h:link value="Datapoints" outcome="datapoints"/> 
+        <f:view>
+
+            <h:form>
+                <h1><h:outputText value="Organisms List"/></h1>
+                <h:dataTable value="#{organismsBean.organisms}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Organism_Name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.organism}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Is_Fungus"/>
+                        </f:facet>
+                        <h:outputText value="#{item.isFungus}"/>
+                    </h:column>                    
+                </h:dataTable>
+            </h:form>
+            
+        </f:view>
+        
+        <f:view>
+
+            <h:form>
+                <h1><h:outputText value="Add Organism"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Organism_Name:" for="organism_name" />
+                    <h:inputText id="organism_name" value="#{organismsBean.newOrganism.organism}" title="Organism_Name" />
+                    <h:outputLabel value="Is_Fungus:" for="is_Fungus" />
+                    <h:selectOneMenu id="is_Fungus" value="#{organismsBean.selectedIsFungus}" title="Is_Fungus" >
+                        <f:selectItem itemValue="#{false}" itemLabel="false" />
+                        <f:selectItem itemValue="#{true}" itemLabel="true"/>
+                    </h:selectOneMenu>                    
+                </h:panelGrid>
+                <h:commandButton value="insert" actionListener="#{organismsBean.newDatapoint()}"/> 
+            </h:form>
+            
+        </f:view>
+    </h:body>
+</html>
+
